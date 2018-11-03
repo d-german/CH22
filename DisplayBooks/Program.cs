@@ -32,6 +32,8 @@ namespace DisplayBooks
                     }
                 });
 
+                db.SaveChanges();
+
                 foreach (var author in authors)
                 {
                     author.FirstName = author.FirstName.ToUpper();
