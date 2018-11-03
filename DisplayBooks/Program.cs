@@ -11,6 +11,7 @@ namespace DisplayBooks
     {
         private static void Main(string[] args)
         {
+            var r = new Random();
             using (var db = new BooksEntities())
             {
                 var authors = db.Authors;
@@ -26,7 +27,7 @@ namespace DisplayBooks
                             Title1 = "Hello World",
                             Copyright = "2018",
                             EditionNumber = 1,
-                            ISBN = "552122222"
+                            ISBN = GetRandomString(r, 15)
                         }
                     }
                 });
@@ -42,6 +43,20 @@ namespace DisplayBooks
                 DisplayAuthorsAndISBNs(db);
                 DisplayAuthorsAndTitles(db);
             }
+        }
+
+        public static string GetRandomString(Random rnd, int length)
+        {
+            var charPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvw xyz1234567890";
+            var rs = new StringBuilder();
+
+            while (length > 0)
+            {
+                rs.Append(charPool[(int) (rnd.NextDouble() * charPool.Length)]);
+                length--;
+            }
+
+            return rs.ToString();
         }
 
         private static void DisplayAuthorsAndTitles(BooksEntities db)
