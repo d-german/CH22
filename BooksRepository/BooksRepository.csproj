@@ -48,10 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BooksRepo.cs" />
+    <Compile Include="BooksRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Models\Author.cs" />
     <Compile Include="Models\AuthorAndISBN.cs" />
     <Compile Include="Models\AuthorAndTitle.cs" />
+    <Compile Include="Models\Title.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

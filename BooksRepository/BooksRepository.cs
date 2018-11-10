@@ -2,10 +2,12 @@
 using System.Linq;
 using Books;
 using BooksRepository.Models;
+using Author = BooksRepository.Models.Author;
+using Title = BooksRepository.Models.Title;
 
 namespace BooksRepository
 {
-    public class BooksRepo : IBooksRepository
+    public class BooksRepository : IBooksRepository
     {
         private readonly BooksEntities _dbContext = new BooksEntities();
 
@@ -37,5 +39,42 @@ namespace BooksRepository
                     ISBN = title.ISBN
                 };
         }
+
+        public bool Add(Author author, params Title[] titles)
+        {
+            try
+            {
+	            var authors = _dbContext.Authors;
+	            var authorDb = new Books.Author
+	            {
+	                FirstName = author.FirstName,
+	                LastName = author.LastName,
+	                Titles = new List<Books.Title>()
+	            };
+	
+	            foreach (var title in titles)
+	            {
+	                authorDb.Titles.Add(
+	                    new Books.Title
+	                    {
+	                        Title1 = title.BookTitle,
+	                        Copyright = title.Copyright,
+	                        ISBN = title.ISBN,
+	                        EditionNumber = title.EditionNumber
+	                    });
+	            }
+	
+	            authors.Add(authorDb);
+	            _dbContext.SaveChanges();
+            }
+            catch (System.Exception)
+            {
+                return false;
+            }
+
+
+            return true;
+        }
+        
     }
 }

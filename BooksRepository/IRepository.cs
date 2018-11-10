@@ -7,5 +7,6 @@ namespace BooksRepository
     {
         IEnumerable<AuthorAndTitle> GetAuthorsAndTitles();
         IEnumerable<AuthorAndISBN> GetAuthorsAndISBNs();
+        bool Add(Author author, params Title[] titles);
     }
 }
